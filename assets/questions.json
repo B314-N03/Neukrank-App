@@ -1,0 +1,39 @@
+{
+  "questions": [
+    {
+      "id":"0",
+      "answer_count": "3",
+      "answers" : ["Ich zeige mit meinem Stift auf das Flipchart" , "Ich zeichne einen Penis" , "Ich heule rum weil mein BS Antrag nicht durch geht"],
+      "right_answers" : [true,false,true],
+      "image" : "assets/img1.jpg"
+    },
+    {
+      "id":"1",
+      "answer_count": "3",
+      "answers" : ["Ich untersuche nur 17 Jährige FWDLer" , "Ich erzähle ihm nichts von dem Hodenkrebs" , "Ich bitte den Patienten auf der Castingcouch Platz zu nehmen."],
+      "right_answers" : [true,false,true],
+      "image" : "assets/img2.jpg"
+    },
+    {
+      "id":"2",
+      "answer_count": "3",
+      "answers" : ["Ich erkundige mich, ab wann der Verlust einer Waffe meldepflichtig wird" , "Ich bin stolz auf meine Schützenschnur in Bronze" , "Yo his palm are sweaty, knees weak arms are heavy..."],
+      "right_answers" : [true,false,true],
+      "image" : "assets/img3.jpg"
+    },
+    {
+      "id":"3",
+      "answer_count": "3",
+      "answers" : ["sieht sick aus Bro, lass mal später im Park Rote Teufel pumpen und ein Paar Ollie's flippen" , "Ich gebe meine Stuhlprobe ab" , "Ich simuliere aus Erschöpfung ab der 3. Runde einen Schlüsselbeinbruch"],
+      "right_answers" : [true,false,true],
+      "image" : "assets/img4.jpg"
+    },
+    {
+      "id":"4",
+      "answer_count": "3",
+      "answers" : ["Ich lege dem Vordermann meine Eier in die Hände" , "Ich packe Wir sagen Dankeschön von den Flippers in die Playlist " , "Ich werde grundlos ohnmächtig um nicht länger Teil dieser Veranstaltung zu sein "],
+      "right_answers" : [true,false,true],
+      "image" : "assets/img5.jpg"
+    }
+  ]
+}
