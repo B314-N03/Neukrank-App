@@ -2,95 +2,115 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/favourites.dart';
 import 'package:flutter_app/questions_training.dart';
 import 'package:flutter_app/questions_exam.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:flutter_app/splash.dart';
 
+int currIndex = 2;
 
+void main() {
+  runApp(App());
+}
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget{
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return MaterialApp(
       darkTheme: ThemeData.dark(),
       theme: ThemeData.light(),
-      home: const MyHomePage(),
+      home: MyApp(),
       debugShowCheckedModeBanner: false,
     );
   }
+
+}
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+
+class _MyAppState extends State<MyApp> {
+  int currentindex = 0;
+  int oldIndex = 0;
+  List<Widget> widgetlist = [
+    Splash(),
+    Questions_Training(),
+    Questions_Exam(),
+    Favourites(),
+  ];
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Center(
-          child: Row(children: [
-          Icon(Icons.traffic),
-          Center(child : const Text("MSG bis DZE")),
-          Icon(Icons.menu)
-        ],mainAxisAlignment: MainAxisAlignment.spaceAround,)),
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
-      ),
-      body: Center(
-        child:
-       Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(child: Text("Klasse Bravo",style: TextStyle(fontSize:50,color:Colors.black),)),
-            SizedBox(height: 15),
-            SizedBox(child: Text("Prüfung bis 01.10.2023",style: TextStyle(fontSize:20,color:Colors.black),)),
-            SizedBox(height: 200,width: 250,child: Image.asset("assets/3098764914.jpg")),
-            SizedBox(height: 15,),
-            SizedBox(width: 150,height: 30,
-              child:  ElevatedButton(onPressed: (() => Navigator.push(context,MaterialPageRoute(builder: (context) => const Questions_Training()))),style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)), 
-                  child: Center(
-                      child: Row(children: [
-                      Icon(Icons.question_mark),
-                      SizedBox(width: 10),
-                      Text("Training")
-                      ],) 
-                  )
-               ),),
-            SizedBox(height: 5),
-            SizedBox(width: 150,height: 30,
-              child:  ElevatedButton(
-                onPressed: (() => showDialog(
-                  context: context,
-                  builder: (context) => AlertDialog( 
-                    actions: [],
-                    
-                    )
-                  )),
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)), 
-                  child: Center(
-                      child: Row(children: [
-                      Icon(Icons.question_mark),
-                      SizedBox(width: 10),
-                      Text("Prüfung"),
-                      ],) 
-                  )
-               ),),
-        ],
-      )
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,MaterialPageRoute(builder: (context) => const Favourites()));
-        },
-        backgroundColor: Colors.yellow[700],
-        child: Icon(
-          Icons.star,
-          color: Colors.black,
-        ),
+  Widget build(BuildContext context){
+    return MaterialApp(
+      debugShowCheckedModeBanner:false,
+      home:
+      Scaffold(
+      body: widgetlist[currentindex],
+      bottomNavigationBar: Container(
+        color:Colors.black,
+        child: 
+              GNav(
+                backgroundColor:Colors.black,
+                color:Colors.white,
+                activeColor:Colors.white,
+                gap:8,
+                onTabChange:(index) => {
+                    if(index == 2 && currentindex != index){
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog( 
+                          title:Text("Bist du dir Sicher?"),
+                          content: Text("Spaß, juckt mich doch nicht wenn du schlecht bist xD"),
+                          actions: [
+                            TextButton(
+                            child:Text("Abbrechen") ,
+                            onPressed: () =>{
+                              Navigator.pop(context),
+                              setState(() {
+                                currentindex = oldIndex;
+                              },)
+                            },),
+                            TextButton(
+                            child:Text("Zur Prüfung") ,
+                            onPressed: () =>{
+                              Navigator.pop(context),
+                              setState(() {
+                              oldIndex = currentindex;
+                              currentindex = index;
+                              },)
+                            },)
+                          ],                    
+                          )
+                      ),
+                    }
+                    else{
+                      setState(() {
+                      oldIndex = currentindex;
+                      currentindex = index;
+                      },)
+                    }
+                } ,
+                tabs: [
+                  GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                  ),
+                  GButton(
+                    icon: Icons.question_mark,
+                    text: 'Training',
+                  ),
+                  GButton(
+                    icon: Icons.book,
+                    text: 'Exam',
+                  ),
+                  GButton(
+                    icon: Icons.favorite,
+                    text: 'Favorites'
+                  ),
+                ],
+              ),
+          ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(MyApp());
 }
